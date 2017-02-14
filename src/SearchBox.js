@@ -23,7 +23,7 @@ class SearchBox extends Component {
       <div className="search--box">
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <label>
-            <input type="search" name="username" placeholder="Username" value={this.state.username} />
+            <input type="search" name="username" placeholder="Type Username + Enter" value={this.state.username} />
           </label>
         </form>
       </div>

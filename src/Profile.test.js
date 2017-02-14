@@ -1,43 +1,58 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
-import Capybara from './Capybara'
+import { mount } from 'enzyme'
+import Profile from './Profile'
 
-describe('Capybara', () => {
-  let image,
-      onClick,
-      text,
-      wrapper
+const profileData = {
+  username: 'dpickett',
+  name: 'Dan Pickett',
+  avatar: 'https://avatars.githubusercontent.com/u/1082?v=3',
+  location: 'Boston, MA',
+  repos: '∞',
+  followers: '500',
+  following: '99',
+  homeUrl: 'https://github.com/dpickett',
+  found: true
+}
 
-  beforeEach(() => {
-    onClick = jasmine.createSpy('onClick spy')
-    wrapper = shallow(
-      <Capybara
-        image="http://fakeurl.com/capybara"
-        onClick={onClick}
-        text="I am a Capybara!"
-      />
-    )
+describe('<Profile />', () => {
+  it('should set props for the data attribute', () => {
+    const profileComponent = mount(<Profile data={profileData} />)
+    expect(profileComponent.props().data).toBeDefined()
+    // expect(profileComponent.props().data).toMatchObject(profileData)
   })
 
-  it('should render an h1 tag', () => {
-    expect(wrapper.find('h1')).toBeDefined()
-  })
+  describe('when a profile has been found', () => {
+    it('displays the name of the user', () => {
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('Dan Pickett')
+    })
 
-  it('should render an h1 tag with the text property value', () => {
-    expect(wrapper.find('h1').text()).toBe('I am a Capybara!')
-  })
+    it('displays the location of the user', () => {
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('Boston, MA')
+    })
 
-  it('should render an img tag with the specific props', () => {
-    expect(wrapper.find('img').props()).toEqual({
-      alt: 'I am a Capybara!',
-      src: 'http://fakeurl.com/capybara',
-      height: '400',
-      width: '600'
+    it('displays the number of repositories', () => {
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('∞ Repositories')
+    })
+
+    it('displays the number of followers', () => {
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('500 Followers')
+    })
+
+    it('displays the number of people this user is following', () => {
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('99 Following')
     })
   })
 
-  it('should invoke the onClick function from props when clicked', () => {
-    wrapper.simulate('click')
-    expect(onClick).toHaveBeenCalled()
+  describe('when a user cannot be found', () => {
+    it('diplays an error message', () => {
+      const profileData = { found: false }
+      const profileComponent = mount(<Profile data={profileData} />)
+      expect(profileComponent.text()).toContain('We could not find a GitHub user with that username.')
+    })
   })
 })

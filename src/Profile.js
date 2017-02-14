@@ -6,14 +6,15 @@ class Profile extends Component {
     let followers = `${data.homeUrl}/followers`
     let repositories = `${data.homeUrl}?tab=repositories`
     let following = `${data.homeUrl}/following`
-    if (data.notFound === 'Not Found')
+
+    if (!data.found) {
       return (
         <div className="not-found">
           <h2>Oops!</h2>
-          <p>The Component Could not Find The You Were Looking For. Try Again.</p>
+          <p>We could not find a GitHub user with that username. Try again.</p>
         </div>
       )
-    else
+    } else {
       return (
         <section className="github--profile">
           <div className="github--profile__info">
@@ -26,7 +27,7 @@ class Profile extends Component {
                 {data.name || data.username}
               </a>
             </h2>
-            <h3>{data.location || 'I Live In My Mind'}</h3>
+            <h3>{data.location}</h3>
           </div>
 
           <div className="github--profile__state">
@@ -34,25 +35,26 @@ class Profile extends Component {
                <li>
                   <a href={followers} target="_blank" title="Number Of Followers">
                     <i>{data.followers}</i>
-                    <span>Followers</span>
+                    <span> Followers</span>
                   </a>
                </li>
                <li>
                   <a href={repositories} target="_blank" title="Number Of Repositoriy">
                     <i>{data.repos}</i>
-                    <span>Repositoriy</span>
+                    <span> Repositories</span>
                   </a>
                </li>
                <li>
                   <a href={following} target="_blank" title="Number Of Following">
                     <i>{data.following}</i>
-                    <span>Following</span>
+                    <span> Following</span>
                   </a>
                </li>
             </ul>
           </div>
         </section>
       )
+    }
   }
 }
 

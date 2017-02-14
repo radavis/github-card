@@ -4,29 +4,31 @@ import Profile from './Profile'
 import './App.css'
 
 const API = 'https://api.github.com/users'
+const defaultProfile = {
+  username: 'dpickett',
+  name: 'Dan Pickett',
+  avatar: 'https://avatars.githubusercontent.com/u/1082?v=3',
+  location: 'Boston, MA',
+  repos: '∞',
+  followers: '∞',
+  following: '∞',
+  homeUrl: 'https://github.com/dpickett',
+  found: true
+}
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      username: 'hesmaili',
-      name: '',
-      avatar: '',
-      location: '',
-      repos: '',
-      followers: '',
-      following: '',
-      homeUrl: '',
-      notFound: ''
-    }
+    this.state = defaultProfile
     this.fetchProfile = this.fetchProfile.bind(this)
   }
 
   fetchProfile(username) {
     let url = `${API}/${username}`
+
     fetch(url)
     .then((response) => {
-      if (response.statusCode === 200) {
+      if (response.ok) {
         return response.json()
       } else {
         throw new Error(response.statusText)
@@ -42,12 +44,12 @@ class App extends Component {
         followers: json.followers,
         following: json.following,
         homeUrl: json.html_url,
-        notFound: json.message
+        found: true
       })
     })
     .catch((error) => {
-      console.log('Oops! There was a problem.')
-      console.log(error)
+      console.log(`Response from GitHub API: ${error}`)
+      this.setState({found: false})
     })
   }
 
