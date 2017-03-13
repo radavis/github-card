@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchProfile(this.state.useraname)
+    this.fetchProfile(this.state.username)
   }
 
   render() {
