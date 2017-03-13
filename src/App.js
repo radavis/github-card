@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchProfile(this.state.username)
+    this.fetchProfile(this.state.useraname)
   }
 
   render() {
@@ -66,7 +66,7 @@ class App extends Component {
         </section>
         <span className="creator">
           GitHub Card With ReactJs - Created By
-          <a href="https://twitter.com/hesmaili95" target="_blank" title="Hamed Esmaili">
+          <a href="https://twitter.com/hesmaili95" title="Hamed Esmaili">
             Hamed Esmaili
           </a>
         </span>
