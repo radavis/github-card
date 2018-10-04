@@ -65,9 +65,16 @@ class App extends Component {
           <Profile data={this.state} />
         </section>
         <span className="creator">
-          GitHub Card With ReactJs - Created By
+          GitHub Card in ReactJs
+          <br />
+          Created by
           <a href="https://twitter.com/hesmaili95" title="Hamed Esmaili">
             Hamed Esmaili
+          </a>
+          <br />
+          Refactoring and Tests by
+          <a href="https://github.com/radavis" title="Richard Davis">
+            Richard Davis
           </a>
         </span>
       </div>
