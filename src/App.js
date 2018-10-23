@@ -4,23 +4,18 @@ import Profile from './Profile'
 import './App.css'
 
 const API = 'https://api.github.com/users'
-const defaultProfile = {
-  username: 'dpickett',
-  name: 'Dan Pickett',
-  avatar: 'https://avatars.githubusercontent.com/u/1082?v=3',
-  location: 'Boston, MA',
-  repos: '∞',
-  followers: '∞',
-  following: '∞',
-  homeUrl: 'https://github.com/dpickett',
-  found: true
-}
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = defaultProfile
-    // this.fetchProfile = this.fetchProfile.bind(this)
+  state = {
+    username: 'dpickett',
+    name: 'Dan Pickett',
+    avatar: 'https://avatars.githubusercontent.com/u/1082?v=3',
+    location: 'Boston, MA',
+    repos: '∞',
+    followers: '∞',
+    following: '∞',
+    homeUrl: 'https://github.com/dpickett',
+    found: true
   }
 
   fetchProfile = (username) => {
@@ -49,7 +44,7 @@ class App extends Component {
     })
     .catch((error) => {
       console.log(`Response from GitHub API: ${error}`)
-      this.setState({found: false})
+      this.setState({ found: false })
     })
   }
 

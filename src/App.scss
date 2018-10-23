@@ -145,5 +145,6 @@ a {
     transform: translateX(-50%);
     a {
         color: lighten($primary-color, 11%);
+        margin: auto 0.25rem;
     }
 }
