@@ -20,10 +20,10 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = defaultProfile
-    this.fetchProfile = this.fetchProfile.bind(this)
+    // this.fetchProfile = this.fetchProfile.bind(this)
   }
 
-  fetchProfile(username) {
+  fetchProfile = (username) => {
     let url = `${API}/${username}`
 
     fetch(url)
